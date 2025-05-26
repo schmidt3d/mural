@@ -161,8 +161,8 @@ void Movement::getBeltAngles(const double frameX, const double frameY, const dou
     double y_PL;
     getLeftTangetPoint(frameX, frameY, gamma, x_PL, y_PL);
     phi_L = atan2(y_PL, x_PL);     // Angle of left belt, measured from line connecting the pins. [rad]
-    Serial.printf("  getLeftTangetPoint: frameX(%s), frameY(%s), gamma(%s), x(%s), y(%s), phi_L(%s)\n", 
-            String(frameX), String(frameY), String(gamma), String(x_PL), String(y_PL), String(phi_L));
+    // Serial.printf("  getLeftTangetPoint: frameX(%s), frameY(%s), gamma(%s), x(%s), y(%s), phi_L(%s)\n", 
+    //         String(frameX), String(frameY), String(gamma), String(x_PL), String(y_PL), String(phi_L));
     // Coordinates of right pulley tangent point:
     // const double P_RX = s_R * cos(gamma); // [mm]
     // const double P_RY = s_R * sin(gamma); // [mm]
@@ -172,8 +172,8 @@ void Movement::getBeltAngles(const double frameX, const double frameY, const dou
     double y_PR;
     getRightTangetPoint(frameX, frameY, gamma, x_PR, y_PR);
     phi_R = atan2(y_PR, topDistance - x_PR);     // Angle of left belt, measured from line connecting the pins. [rad]
-    Serial.printf("  getRightTangetPoint: frameX(%s), frameY(%s), gamma(%s), x(%s), y(%s), phi_R(%s)\n", 
-            String(frameX), String(frameY), String(gamma), String(topDistance - x_PR), String(y_PR), String(phi_R));
+    // Serial.printf("  getRightTangetPoint: frameX(%s), frameY(%s), gamma(%s), x(%s), y(%s), phi_R(%s)\n", 
+    //         String(frameX), String(frameY), String(gamma), String(topDistance - x_PR), String(y_PR), String(phi_R));
 }
 
 void Movement::getBeltForces(const double phi_L, const double phi_R, double& F_L, double&F_R) const {
@@ -241,8 +241,8 @@ double Movement::getDilationCorrectedBeltLength(double belt_length, double F_bel
     // Apply belt length correction: The belts stretch because of Mural's mass. 
     // This function returns a (shorter) length of the belt, such that with gravity the belt
     // exactly as long as required.
-    const double dilation_factor = 1 + 5e-5 * F_belt;
-    const double belth_length_corrected = belt_length / dilation_factor;
+    const double belt_dilation_factor = 1 + 5e-5 * F_belt;
+    const double belth_length_corrected = belt_length / belt_dilation_factor;
     return belth_length_corrected;
 }
 

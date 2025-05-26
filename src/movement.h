@@ -84,7 +84,7 @@ private:
     inline void getLeftTangetPoint(const double frameX, const double frameY, const double gamma, double& x_PL, double& y_PL) const;
     inline void getRightTangetPoint(const double frameX, const double frameY, const double gamma, double& x_PR, double& y_PR) const;
     double getDilationCorrectedBeltLength(double belt_length, double F_belt) const;
-    
+
 public:
     Movement(Display *display);
     struct Point {
