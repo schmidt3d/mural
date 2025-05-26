@@ -14,7 +14,7 @@
  limitations under the License.
 **/
 
-// #include <movement.h>
+#include <kinematicmodel.h>
 #include <unity.h>
 
 // Movement movement;
