@@ -353,14 +353,15 @@ float Movement::beginLinearTravel(double x, double y, int speed)
         throw std::invalid_argument("Invalid y");
     }
 
-    auto lengths = getBeltLengths(x, y);
-    auto leftLegSteps = lengths.left;
-    auto rightLegSteps = lengths.right;
+    const Movement::Lengths lengths = getBeltLengths(x, y);
+    const int leftLegSteps = lengths.left;
+    const int rightLegSteps = lengths.right;
 
-    auto deltaLeft = int(abs(abs(leftMotor->currentPosition()) - leftLegSteps));
-    auto deltaRight = int(abs(abs(rightMotor->currentPosition()) - rightLegSteps));
+    const int deltaLeft = int(abs(abs(leftMotor->currentPosition()) - leftLegSteps));
+    const int deltaRight = int(abs(abs(rightMotor->currentPosition()) - rightLegSteps));
 
-    float leftSpeed, rightSpeed, moveTime;
+    float leftSpeed, rightSpeed;    // [steps/s]
+    float moveTime;                 // [s] Duration of the move operation.
     if (deltaLeft >= deltaRight)
     {
         leftSpeed = speed;
@@ -380,6 +381,9 @@ float Movement::beginLinearTravel(double x, double y, int speed)
     
     rightMotor->moveTo(rightLegSteps);
     rightMotor->setSpeed(rightSpeed);
+
+    Serial.printf("Speed left %1.4f, Speed right %1.4f\n", leftSpeed, rightSpeed);
+
 
     //display->displayText(String(X) + ", " + String(Y));
     // delay(sleepDurationAfterMove_ms);
